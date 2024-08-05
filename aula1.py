@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import sqlite3
 
-
+"""--> resolver <erro01>
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfbase import pdfmetrics
@@ -10,10 +10,11 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import SimpleDocTemplate, Image, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 import webbrowser
-
+"""
 
 root = Tk()
 
+"""--> resolver <erro 01>
 class Relatorios():
     def printCliente(self):
         webbrowser.open("cliente.pdf")
@@ -47,7 +48,7 @@ class Relatorios():
         self.c.showPage()
         self.c.save()
         self.printCliente()
-        
+"""        
            
 
 class Funcs():
@@ -152,8 +153,9 @@ class Funcs():
         self.desconecta_bd()
         self.select_lista()
         self.limpa_tela()        
-        
-class Application(Funcs, Relatorios):
+
+#  class Application(Funcs, Relatorios): após resolver <erro01>     
+class Application(Funcs):
     def __init__(self):  # exibir janela
         self.root = root  # 1
         self.tela()
@@ -321,7 +323,7 @@ class Application(Funcs, Relatorios):
         filemenu.add_command(label="Sair", command=Quit)
         filemenu2.add_command(label="Limpa Tela", command=self.limpa_tela)
         
-        filemenu2.add_command(label="Ficha do cliente", command=self.geraRelatCliente())
+        # <erro 01> filemenu2.add_command(label="Ficha do cliente", command=self.geraRelatCliente())
         
         
         
