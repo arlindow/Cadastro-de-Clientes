@@ -1,14 +1,15 @@
 from tkinter import *
 from tkinter import ttk
 import sqlite3
+
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import SimpleDocTemplate, Image
+from reportlab.platypus import SimpleDocTemplate, Image, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 import webbrowser
-from reportlab.platypus import SimpleDocTemplate, Image 
-
 
 
 root = Tk()
@@ -30,6 +31,18 @@ class Relatorios():
         
         self.c.setFont("Helvetica-Bold", 24)
         self.c.drawString(100, 790, 'Ficha do Cliente' )
+        
+        self.c.setFont("Helvetica-Bold", 18)
+        self.c.drawString(50, 780, 'codigo: ', self.codigoRel)
+        self.c.drawString(50, 760, 'nome: ',self.nomeRel)
+        self.c.drawString(50, 730, 'cpf/cnpj: ', self.cpfRel)
+        self.c.drawString(50, 700, 'Inscrição Estadual: ', self.ieRel)
+        self.c.drawString(50, 670, 'Telefone: ', self.telefoneRel)
+        self.c.drawString(50, 640, 'Cidade: ', self.cidadeRel)
+        self.c.drawString(50, 610, 'UF: ', self.ufRel)
+        
+        self.c.rect(20,550, 550, 5, filt=True, stroke=False)
+        
         
         self.c.showPage()
         self.c.save()
