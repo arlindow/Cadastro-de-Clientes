@@ -50,7 +50,6 @@ class Relatorios():
         self.printCliente()
 """        
            
-
 class Funcs():
     def limpa_tela(self):
         self.codigo_entry.config(state=NORMAL)  # Permitir edição antes de limpar
@@ -152,7 +151,26 @@ class Funcs():
         self.conn.commit()
         self.desconecta_bd()
         self.select_lista()
-        self.limpa_tela()        
+        self.limpa_tela()
+        
+    def busca_cliente(self):
+        self.conecta_bd()
+        self.listaCli.delete(*self.listaCli.get_children())
+        
+        self.nome_entry.insert(END, '%')
+        nome = self.nome_entry.get()
+        self.cursor.execute(
+        """ 
+            SELECT cod, nome_cliente, cpf_cnpj, ie, telefone, cidade, uf FROM clientes 
+            WHERE nome_cliente LIKE '%s' ORDER BY nome_cliente ASC
+        """ % nome
+        )
+        buscanomeCLi = self.cursor.fetchall()
+        for i in buscanomeCLi:
+            self.listaCli.insert("",END, values=i)
+                                 
+        self.limpa_tela()    
+        self.desconecta_bd()        
 
 #  class Application(Funcs, Relatorios): após resolver <erro01>     
 class Application(Funcs):
@@ -195,7 +213,7 @@ class Application(Funcs):
         
         # criação do botão buscar
         self.bt_buscar = Button(self.frame_1, text='Buscar', bd=4, bg='#CCCC00', fg='white',
-                                font=('verdana', 7, 'bold'))
+                                font=('verdana', 7, 'bold'), command=self.busca_cliente)
         self.bt_buscar.place(relx=0.3, rely=0.1, relwidth=0.1, relheight=0.15)
         
         # criação do botão novo
@@ -294,8 +312,6 @@ class Application(Funcs):
 
         self.listaCli.place(relx=0.01, rely=0.01, relwidth=0.95, relheight=0.85)
         
-        
-
         # Scrollbar
         self.scrollLista = Scrollbar(self.frame_2, orient='vertical')
         self.listaCli.configure(yscroll=self.scrollLista.set)
