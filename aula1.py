@@ -78,6 +78,8 @@ class Funcs():
                 
                 cod INTEGER PRIMARY KEY,
                 nome_cliente CHAR(40) NOT NULL,
+                cpf_cnpj TEXT(15) NOT NULL,
+                IE TEXT(15) NUll, 
                 telefone INTEGER(20) NOT NULL,
                 cidade CHAR(40) NOT NULL,
                 uf CHAR(2) NOT NULL
@@ -339,7 +341,7 @@ class Application(Funcs):
         filemenu.add_command(label="Sair", command=Quit)
         filemenu2.add_command(label="Limpa Tela", command=self.limpa_tela)
         
-        # <erro 01> filemenu2.add_command(label="Ficha do cliente", command=self.geraRelatCliente())
+        # <erro 01> filemenu2.add_command(label="Ficha do cliente", command=self.geraRelatCliente)
         
         
         
